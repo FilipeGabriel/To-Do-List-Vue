@@ -20,30 +20,30 @@
                 
                 <h3>Lista de Tarefas</h3>
                 
-                <div class="all-todos">
-                    <div class="single-todo done">
-                        <p>Aprender HTML, CSS e Javascript</p>
+                <div class="all-todos" v-for="task in taskList">
+                    <div 
+                        class="single-todo" 
+                        @click="task.finished = !task.finished"
+                        :class="{ done : task.finished }"
+                    >
+                        <p>{{ task.description }}</p>
                     </div>
-                    <div class="single-todo done">
-                        <p>Aprender o básico de Vue JS</p>
-                    </div>
-                    <div class="single-todo">
-                        <p>Completar o desafio de Vue JS com excelência</p>
-                    </div>
-
                 </div>
 
-                <button class="clear">Limpar tudo</button>
+                <template v-if="taskList.length > 0">
+                    <button class="clear" @click="clearAll()">Limpar tudo</button>
+                </template>
+                
 
-                <input type="text" placeholder="Escreva uma nova tarefa...">
-                <button class="add">Adicionar</button>
+                <input type="text" placeholder="Escreva uma nova tarefa..." v-model="task.description">
+                <button class="add" @click="addTask()">Adicionar</button>
 
                 <div class="instructions">
                     Instruções:
                     <ul>
+                        <li>Use o input para adicionar novas tarefas</li>
                         <li>Clique no texto da tarefa para alternar entre feita / não feita</li>
                         <li>Use o botão limpar tudo para remover todas as tarefas</li>
-                        <li>Use o input para adicionar novas tarefas</li>
                     </ul>
                 </div>
             </section>
