@@ -20,6 +20,7 @@ createApp({
                 description: "",
                 finished: false
             };
+            localStorage.setItem("TaskList", JSON.stringify(this.taskList));
         } else {
             alert("Insert the task description");
         }
@@ -27,5 +28,11 @@ createApp({
     clearAll: function() {
         this.taskList = [];
     }
+  },
+  created() {
+    this.taskList = localStorage.getItem("TaskList") ? JSON.parse(localStorage.getItem("TaskList")) : this.taskList;
+  },
+  updated() {
+    localStorage.setItem("TaskList", JSON.stringify(this.taskList));
   }
 }).mount('#app');
